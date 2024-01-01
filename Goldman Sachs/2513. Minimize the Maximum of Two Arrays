@@ -1,0 +1,29 @@
+class Solution {
+public:
+int binarySearch(int mx, int &d1,int &d2,int &unq1,int &unq2){
+    long freq1 = mx - (mx/d1), freq2 = mx - (mx/d2);
+    if(d1==d2){
+        if(freq1 >= unq1+unq2) return 1;
+        return 0;
+    }
+    long gcd = __gcd(d1,d2);
+    long ans =d1;
+    ans*=d2;
+    ans/=gcd;
+    long freq3 = mx - (mx/ans);
+    if(freq3 >=unq1+unq2 and freq1>=unq1 and freq2>=unq2) return 1;
+    return 0;
+}
+    int minimizeSet(int d1, int d2, int unq1, int unq2) {
+        int left = unq1+unq2;
+        int right = INT_MAX;
+        while(left< right){
+            long mid = left + (right-left)/2;
+            if(binarySearch(mid,d1,d2,unq1,unq2)){
+                right = mid;
+            }
+            else left = mid+1;
+        }
+        return left;
+    }
+};
