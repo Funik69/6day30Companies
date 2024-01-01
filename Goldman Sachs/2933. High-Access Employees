@@ -1,0 +1,32 @@
+class Solution {
+public:
+    vector<string> findHighAccessEmployees(vector<vector<string>>& access_times) {
+        map<string,vector<int>> mp;
+        vector<string> ans;
+        for(auto i:access_times){
+            string ch=i[0];
+            string t=i[1];
+            int time=0;
+            if(t[0]=='0'){
+                time+=(t[1]-'0')*60;
+                if(t[2]=='0') time+=(t[3]-'0');
+                else time+=(t[2]-'0')*10 +(t[3]-'0');
+            }
+            else{
+                time+=((t[0]-'0')*10 +(t[1]-'0'))*60;
+                if(t[2]=='0') time+=(t[3]-'0');
+                else time+=(t[2]-'0')*10 +(t[3]-'0');
+            }
+            mp[ch].push_back(time);
+        }
+        for(auto i:mp){
+            vector<int> temp=i.second;
+            if(temp.size()<=2) continue;
+            sort(temp.begin(),temp.end());
+            for(int j=2;j<temp.size();j++){
+                if(temp[j]-temp[j-2]<60) {ans.push_back(i.first); break;}
+            }
+        }
+        return ans;
+    }
+};
