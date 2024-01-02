@@ -1,0 +1,23 @@
+//Recursion + Backtracking approach take or not take 
+
+class Solution {
+public:
+void soll(vector<vector<int>> &vv, int tar, int n,int i,vector<int> &v){
+    if(tar==0 and n==0) {
+        vv.push_back(v);
+        return ;
+    }
+    if(i>9) return ;
+    if(n<0 or tar<0) return ;
+    v.push_back(i);
+    soll(vv,tar-1,n-i,i+1,v);
+    v.pop_back();
+    soll(vv,tar,n,i+1,v);
+}
+    vector<vector<int>> combinationSum3(int tar, int n) {
+        vector<vector<int>> vv;
+        vector<int> v;
+        soll(vv,tar,n,1,v);
+        return vv;
+    }
+};
