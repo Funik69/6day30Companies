@@ -1,0 +1,21 @@
+class Solution {
+public:
+void soll(string d,vector<string> &v,int i,string s,vector<string> &vs){
+    if(i==d.size()){
+        v.push_back(s);
+        return ;
+    }
+    string cur = vs[d[i]-'0'];
+    for(int j=0;j<cur.size();j++){
+        soll(d,v,i+1,s+cur[j],vs);
+    }
+
+}
+    vector<string> letterCombinations(string d) {
+        vector<string> v;
+        if(d.size()==0) return v;
+        vector<string> vs = {"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        soll(d,v,0,"",vs);
+        return v;
+    }
+};
