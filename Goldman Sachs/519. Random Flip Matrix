@@ -1,0 +1,39 @@
+class Solution {
+public:
+int m,n;
+vector<pair<int,int>> vp;
+    Solution(int m, int n) {
+        this->m=m;
+        this->n=n;
+        vp.clear();
+    }
+    bool isValid(int r, int c){
+        if(vp.size()==0) return false;
+        for(auto &i:vp){
+            if(i.first == r and i.second == c) return true;
+        }
+        return false;
+    }
+    
+    vector<int> flip() {
+        int row = rand()%m;
+        int col = rand()%n;
+        while(isValid(row,col)){
+            row = rand()%m;
+            col = rand()%n;
+        }
+        vp.push_back({row,col});
+        return {row,col};
+    }
+    
+    void reset() {
+        vp.clear();
+    }
+};
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution* obj = new Solution(m, n);
+ * vector<int> param_1 = obj->flip();
+ * obj->reset();
+ */
