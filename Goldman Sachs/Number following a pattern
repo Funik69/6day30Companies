@@ -1,0 +1,27 @@
+class Solution{   
+public:
+    string printMinNumberForPattern(string S){
+       int val=1;
+       string ans="";
+       if(S.size()==1){
+           if(S[0]=='I') return "12";
+           else return "21";
+       }
+       for(int i=0;i<S.size();i++){
+           if(S[i]=='I') ans+=to_string(val++); 
+           else{
+               string cur="";
+               while(S[i]=='D' and i<S.size()){
+               cur+=to_string(val++);
+               i++;
+           }
+           cur+=to_string(val++);
+           reverse(cur.begin(),cur.end());
+           ans+=cur;
+           }
+       }
+       if(S[S.size()-1]=='I')
+       ans+=to_string(val);
+       return ans;
+    }
+};
