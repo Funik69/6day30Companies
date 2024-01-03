@@ -1,0 +1,22 @@
+class DataStream {
+public:
+vector<int> v;
+int val,kk;
+int cnt=0,i=0;
+    DataStream(int value, int k) {
+        val=value;
+        kk=k;
+        v.clear();
+    }
+    
+    bool consec(int num) {
+        v.push_back(num);
+        if(num==val) cnt++;
+        if(v.size()<kk) return false;
+        if(v.size()>kk){
+            if(v[i++]==val) cnt--;
+        }
+        if(cnt==kk) return true;
+        return false;
+    }
+};
