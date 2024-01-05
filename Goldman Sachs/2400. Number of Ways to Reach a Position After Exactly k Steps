@@ -1,0 +1,21 @@
+class Solution {
+public:
+int mod = 1e9+7;
+int soll(int s, int e, int k,int i, vector<vector<int>>& dp){
+    if(i==0){
+        if(s==e) return 1;
+        return 0;
+    }
+    if(abs(e-s) > i) return 0;
+    if(dp[s+1000][i]!=-1) return dp[s+1000][i] % mod;
+
+    int left = soll(s-1,e,k,i-1,dp)%mod;
+    int right = soll(s+1,e,k,i-1,dp)%mod;
+
+    return dp[1000+s][i] = (left+right)% mod;
+}
+    int numberOfWays(int s, int e, int k) {
+        vector<vector<int>> dp(3000, vector<int>(k+1,-1));
+        return soll(s,e,k,k,dp);
+    }
+};
