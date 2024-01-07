@@ -1,0 +1,31 @@
+class Solution {
+public:
+vector<vector<int>> v;
+    Solution(vector<vector<int>>& rects) {
+        v=rects;
+    }
+    
+    vector<int> pick() {
+        int totalArea=0;
+        vector<int> x;
+        for(auto i:v){
+            int area = (i[2]-i[0]+1)*(i[3]-i[1]+1);
+            totalArea+=area;
+            if(rand()%totalArea < area) x=i;
+        }
+        long xDiff = x[2]-x[0]+1;
+        long yDiff = x[3]-x[1]+1;
+        
+        int r=x[0]+rand()%xDiff;
+        int c=x[1]+rand()%yDiff;
+
+        return {r,c};
+        
+    }
+};
+
+/**
+ * Your Solution object will be instantiated and called as such:
+ * Solution* obj = new Solution(rects);
+ * vector<int> param_1 = obj->pick();
+ */
