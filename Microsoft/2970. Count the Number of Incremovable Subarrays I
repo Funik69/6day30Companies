@@ -1,0 +1,24 @@
+class Solution {
+public:
+bool soll(vector<int>& ans){
+    for(int i=1;i<ans.size();i++){
+        if(ans[i]<=ans[i-1]) return false;
+    }
+    return true;
+}
+    int incremovableSubarrayCount(vector<int>& nums) {
+        int cnt=0;
+        for(int i=0;i<nums.size();i++){
+            for(int j=i;j<nums.size();j++){
+                vector<int> ans;
+                for(int k=0;k<i;k++){
+                    ans.push_back(nums[k]);
+                }
+                for(int k=j+1;k<nums.size();k++) ans.push_back(nums[k]);
+                if(soll(ans)) cnt++;
+            }
+
+        }
+        return cnt;
+    }
+};
