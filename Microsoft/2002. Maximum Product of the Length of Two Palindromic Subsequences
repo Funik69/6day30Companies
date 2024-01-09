@@ -1,0 +1,35 @@
+class Solution {
+public:
+int ans=0;
+bool isPalin(string s){
+    string t="";
+    for(int i=s.size()-1;i>=0;i--){
+        t+=s[i];
+    }
+    return s==t;
+}
+void soll(int i,string &x, string &y, int n,string &s){
+    if(i==n) {
+        if(isPalin(x) and isPalin(y)) {
+            int t=x.size();
+            int w=y.size();
+            ans=max(ans,(t*w));
+        }
+        return ;
+    }
+    x.push_back(s[i]);
+    soll(i+1,x,y,n,s);
+    x.pop_back();
+
+    y.push_back(s[i]);
+    soll(i+1,x,y,n,s);
+    y.pop_back();
+
+    soll(i+1,x,y,n,s);
+}
+    int maxProduct(string s) {
+        string x,y;
+        soll(0,x,y,s.size(),s);
+        return ans;
+    }
+};
