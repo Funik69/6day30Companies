@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int numFriendRequests(vector<int>& ages) {
+        map<int,int> mp;
+        int ans=0;
+        for(auto i:ages) mp[i]++;
+        for(int i=0;i<ages.size();i++){
+            int low = 0.5*ages[i]+8;
+            int high = ages[i];
+            for(int j=low;j<=high;j++){
+                if(j==ages[i]){
+                   ans--;
+                }
+                ans+=mp[j];
+            }
+        }
+        return ans;
+    }
+};
