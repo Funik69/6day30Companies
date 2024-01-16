@@ -1,0 +1,24 @@
+class Solution {
+public:
+    string findLongestWord(string s, vector<string>& dict) { 
+        int ans=0;
+        string str="";
+        sort(dict.begin(),dict.end());
+        for(auto i:dict){
+           string x=i;
+           if(x.size()>s.size()) continue;
+           int idx=0;
+           for(auto i:s){
+               if(i==x[idx]) idx++;
+               if(idx==x.size()) break;
+           }
+           if(idx==x.size()){
+               if(ans<idx) {
+                   ans=idx;
+                   str=x;
+               }
+           }
+        }
+        return str;
+    }
+};
