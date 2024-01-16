@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<vector<int>> findWinners(vector<vector<int>>& mch) {
+        //1 2 3 5 4 10 
+        // 3 4 6 7 5 8 9 
+        map<int,int> win,los;
+        for(auto i:mch){
+            win[i[0]]++;
+            los[i[1]]++;
+        }
+        for(auto i:mch){
+            if(los[i[0]]){
+                win[i[0]]=0;
+            }
+        }
+        vector<vector<int>> ans;
+        vector<int> temp;
+        for(auto i:win){
+            if(i.second>0) temp.push_back(i.first);
+        }
+        ans.push_back(temp);
+        temp.clear();
+        for(auto i:los){
+            if(i.second==1) temp.push_back(i.first);
+        }
+        ans.push_back(temp);
+        return ans;
+    }
+};
