@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int maxNumberOfFamilies(int n, vector<vector<int>>& rs) {
+      map<int,vector<int>> adj;
+        long long ans=0;
+        for(auto i:rs){
+            adj[i[0]].push_back(i[1]);
+        }
+        ans+=(n-adj.size())*2;
+        for(auto i:adj){
+            auto v=i.second;
+            unordered_map<int,int> mp;
+            for(long long j:v) mp[j]++;
+            if(mp[2]==0 and mp[3]==0 and mp[4]==0 and mp[5]==0) {
+                ans++;
+                mp[4]++;
+            }
+            if(mp[6]==0 and mp[7]==0 and mp[8]==0 and mp[9]==0){ mp[7]++; ans++;}
+             if(mp[4]==0 and mp[5]==0 and mp[6] ==0 and mp[7] ==0){
+                ans++;
+            }
+        }
+        //1-> 2,3,8
+        // 2->6
+        //3->1, 10
+return ans;
+    }
+};
