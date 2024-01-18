@@ -1,0 +1,9 @@
+class Solution {
+public:
+    int getLastMoment(int n, vector<int>& left, vector<int>& right) {
+        int t1= INT_MAX,t2=INT_MIN;
+        for(auto i:left) t2=max(t2,i);
+        for(auto i:right) t1=min(t1,i);
+        return max(t2,(n-t1));
+    }
+};
