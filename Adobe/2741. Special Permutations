@@ -1,0 +1,20 @@
+class Solution {
+public:
+int mod=1e9+7;
+int soll(int mask,int prev,int count,vector<int>& nums,vector<vector<int>>& dp){
+    if(count == nums.size()) return 1;
+    if(dp[prev][mask]!=-1) return dp[prev][mask];
+    long long ans=0;
+    for(int i=0;i<nums.size();i++){
+        if(mask & (1<<i)) continue;
+        if(mask!=0 and nums[prev]%nums[i]!=0 and nums[i]%nums[prev]!=0) continue;
+        ans = (ans+soll(mask | (1<<i),i,count+1,nums,dp))%mod;
+    }
+    return dp[prev][mask]=ans;
+}
+    int specialPerm(vector<int>& nums) {
+        vector<vector<int>> dp(nums.size(),vector<int>(1<<(nums.size()),-1));
+        int prev=0,count=0,mask=0;
+        return soll(mask,prev,count,nums,dp);
+    }
+};
