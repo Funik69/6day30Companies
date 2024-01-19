@@ -1,0 +1,14 @@
+class Solution {
+public:
+    int minimumLengthEncoding(vector<string>& words) {
+        if(words.size()==1) return words[0].size()+1;
+        sort(words.begin(),words.end(),[&](string &a, string &b){
+            return a.size()>b.size();
+        });
+        string ans=words[0]+"#";
+        for(int i=1;i<words.size();i++){
+            if(ans.find(words[i]+"#")==-1) ans+=words[i]+"#";
+        }
+        return ans.size();
+    }
+};
