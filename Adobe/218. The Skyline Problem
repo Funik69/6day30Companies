@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<vector<int>> getSkyline(vector<vector<int>>& bui) {
+        vector<pair<int,int>> vp;
+        int cur=0,prev=0;
+        for(auto i:bui){
+            vp.push_back({i[0],-i[2]});
+            vp.push_back({i[1],i[2]});
+        }
+        sort(vp.begin(),vp.end());
+        vector<vector<int>> ans;
+        multiset<int> ms;
+        ms.insert(0);
+        for(auto i:vp){
+            if(i.second<0){
+                ms.insert(-i.second);
+            }
+            else ms.erase(ms.find(i.second));
+            cur = *ms.rbegin();
+            if(cur!=prev) {
+                ans.push_back({i.first,cur});
+                prev=cur;
+                }
+        }
+        return ans;
+    }
+};
