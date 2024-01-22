@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<int> smallestTrimmedNumbers(vector<string>& nums, vector<vector<int>>& q) {
+        vector<int> ans;
+        for(auto i:q){
+            int k=i[0];
+            int trim=nums[0].size()-i[1];
+            if(trim<0) trim=0;
+            priority_queue<pair<string, int>, vector<pair<string, int>>, greater<pair<string, int>>> pq;
+            int cnt=0;  
+            for(auto j:nums){
+                pq.push({j.substr(trim),cnt});
+                cnt++;
+            }
+            k--;
+            while(k--){
+                pq.pop();
+            }
+            ans.push_back(pq.top().second);
+
+        }
+    return ans;}
+};
