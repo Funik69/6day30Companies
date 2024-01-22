@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<int> beautifulIndices(std::string s, std::string a, std::string b, int k) {
+        if(s.size()< a.size()) return {};
+        if(s.size()<b.size()) return {};
+        vector<int> va, vb;
+        for (int i = 0; i <= s.size() - a.size(); i++) {
+            if (s.substr(i, a.size()) == a) va.push_back(i);
+        }
+        for (int j = 0; j <= s.size() - b.size(); j++) {
+            if (s.substr(j, b.size()) == b) vb.push_back(j);
+        }
+        int i = 0;
+        vector<int> ans;
+        while (i < va.size()) {
+            for (int j = 0; j < vb.size(); j++) {
+                if (abs(va[i] - vb[j]) <= k) {
+                    ans.push_back(va[i]);
+                    break;
+                }
+            }
+            i++;
+        }
+        return ans;
+    }
+};
