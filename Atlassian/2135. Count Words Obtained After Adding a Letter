@@ -1,0 +1,27 @@
+class Solution {
+public:
+unordered_set<string> st;
+bool valid (string &str){
+    for(int i=0;i<str.size();i++){
+        string temp="";
+        for(int j=0;j<str.size();j++){
+            if(i==j) continue;
+            temp+=str[j];
+        }
+        if(st.find(temp)!=st.end()) return true;
+    }
+    return false;
+}
+    int wordCount(vector<string>& sw, vector<string>& tar) {
+        int ans=0;
+        for(auto &i:sw){
+            sort(i.begin(),i.end());
+            st.insert(i);
+        }
+        for(auto &i:tar){
+            sort(i.begin(),i.end());
+            if(valid(i)) ans++;
+        }
+        return ans;
+    }
+};
