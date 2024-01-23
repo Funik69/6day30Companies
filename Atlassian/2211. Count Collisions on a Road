@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int countCollisions(string dir) {
+        stack<char> st;
+        int ans = 0;
+        for(int i=0;i<dir.size();i++){
+            if(st.empty()) st.push(dir[i]);
+            else if(st.top()=='S' and dir[i]=='L') ans++;
+            else if(st.top()=='R' and dir[i]=='L'){
+                st.pop();
+                dir[i]='S';
+                i--;
+                ans+=2;
+            }
+            else if(st.top()=='R' and dir[i]=='S'){
+                st.pop();
+                dir[i]='S';
+                i--;
+                ans++;
+            }
+            else st.push(dir[i]);
+        }
+        return ans;
+    }
+};
