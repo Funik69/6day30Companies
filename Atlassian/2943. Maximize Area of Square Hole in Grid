@@ -1,0 +1,22 @@
+class Solution {
+public:
+int soll(vector<int> &v){
+    unordered_map<int,int> mp;
+    int len =1;
+    for(auto i:v){
+        if(mp.find(i-1)!=mp.end()){
+            mp[i] = mp[i-1]+1;
+            len = max(len,mp[i]);
+        }
+        else mp[i]=1;
+    }
+    return len;
+}
+    int maximizeSquareHoleArea(int n, int m, vector<int>& hBars, vector<int>& vBars) {
+        sort(hBars.begin(),hBars.end());
+        sort(vBars.begin(),vBars.end());
+        int ans = min(soll(hBars),soll(vBars))+1;
+        return ans*ans;
+        
+    }
+};
