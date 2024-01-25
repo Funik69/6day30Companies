@@ -1,0 +1,23 @@
+class Solution {
+public:
+long long mod=1e9+7;
+long long soll(long long num,long long n){
+    if(n==0) return 1;
+    if(n==1) return (num%mod);
+    if(n%2==0) {
+        long long ans = soll(num,n/2);
+        return (ans*ans)%mod;
+    }
+    else {
+        long long ans = soll(num,n/2);
+        ans = (ans*ans)%mod;
+        return (ans*(num%mod))%mod;
+    }
+}
+    int minNonZeroProduct(int p) {
+        long long val = pow(2,p); val--;
+        long long n=val/2;
+        long long num=val-1;
+        return soll(num,n)*((val)%mod)%mod;
+    }
+};
