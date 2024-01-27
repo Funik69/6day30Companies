@@ -1,0 +1,35 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+int ans=0;
+vector<int> soll(TreeNode* root,int dis){
+    if(root==NULL) return {} ;
+    if(root->left==NULL and root->right==NULL) return {1};
+    auto left = soll(root->left,dis);
+    auto right = soll(root->right,dis);
+    vector<int> store ;
+        for(auto &x : left) store.push_back(x + 1) ;
+        for(auto &x : right) store.push_back(x + 1) ;
+
+    for(auto &i:left){
+        for(auto &j:right){
+            ans+=(i+j<=dis)?1:0;
+        }
+    }
+    return store;
+}
+    int countPairs(TreeNode* root, int distance) {
+        auto c = soll(root,distance);
+        return ans;
+    }
+};
