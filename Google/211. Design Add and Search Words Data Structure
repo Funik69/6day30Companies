@@ -1,0 +1,33 @@
+class WordDictionary {
+public:
+unordered_map<int,vector<string>> mp;
+    WordDictionary() {
+    }
+    
+    void addWord(string word) {
+        mp[word.size()].push_back(word);
+    }
+    
+    bool search(string word) {
+        if(mp.find(word.size())==mp.end()) return false;
+        for(auto &it:mp[word.size()]){
+            bool check = true;
+            for(int i=0;i<word.size();i++){
+                if(word[i]=='.') continue;
+                if(it[i]!=word[i]) {
+                    check = false;
+                    break;
+                }
+            }
+            if(check) return true;
+        }
+        return false;
+    }
+};
+
+/**
+ * Your WordDictionary object will be instantiated and called as such:
+ * WordDictionary* obj = new WordDictionary();
+ * obj->addWord(word);
+ * bool param_2 = obj->search(word);
+ */
