@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int maxEnvelopes(vector<vector<int>>& e) {
+        sort(e.begin(),e.end(),[&](vector<int>& a,vector<int>&b){
+            return a[0]==b[0]?a[1]>b[1]:a[0]<b[0];
+        });
+        vector<int> v;
+        for(int i=0;i<e.size();i++){
+            int tar = e[i][1];
+            int idx=lower_bound(v.begin(),v.end(),tar)-v.begin();
+            if(idx==v.size()) v.push_back(tar);
+            else v[idx]=tar;
+        }
+        return v.size();
+    }
+};
